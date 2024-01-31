@@ -1,15 +1,35 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Sticky Header</title>
+    <style>
+        /* Add your custom styles here */
+        /* For example, adjusting the background color of the sticky header */
+        .sticky-header {
+            background-color: #4CAF50; /* Green */
+            color: white;
+        }
+    </style>
+</head>
+<body class="font-sans">
 
-<html>
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-50 bg-gray-800 p-4 text-white">
+        <div class="container mx-auto">
+            <!-- Your header content goes here -->
+            <h1 class="text-2xl font-semibold">Your Website Name</h1>
+            <!-- Add more elements as needed -->
+        </div>
+    </header>
 
-    <body>
-        <h1>
-            Mohamed Fazil
-        </h1>
-        <p>
-            Welcome to my website!
-        </p>
-        <img src="https://content.codecademy.com/articles/github-pages-via-web-app/happy-ice-cream.gif" />
-    </body>
+    <!-- Main Content -->
+    <div class="container mx-auto mt-8">
+        <!-- Your main content goes here -->
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+    </div>
 
+</body>
 </html>
