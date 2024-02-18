@@ -3,51 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website</title>
-    <!-- Include the Tailwind CSS CDN or import it into your project -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Medieval Chatbot</title>
 </head>
-<body class="font-sans">
-
-    <!-- Sticky Header -->
-    <header class="sticky top-0 bg-gray-800 text-white p-4">
-        <div class="container mx-auto">
-            <h1 class="text-2xl font-semibold">Your Website</h1>
-            <!-- Add your navigation links or other header content here -->
-        </div>
-    </header>
-
-    <!-- Full-screen Background Image -->
-    <div class="bg-cover bg-center h-screen flex items-center justify-center" style="background-image: url('your-background-image.jpg');">
-        <!-- Content on top of the background image goes here -->
-        <div class="text-white text-center">
-            <h2 class="text-4xl font-bold mb-4">Welcome to Your Website</h2>
-            <p class="text-lg">Explore our projects below:</p>
+<body>
+    <div class="container">
+        <h1>Medieval Chatbot</h1>
+        <div class="chat-container">
+            <div class="chat" id="chat"></div>
+            <div class="input-container">
+                <input type="text" id="userInput" placeholder="Type your message...">
+                <button onclick="ask()">Send</button>
+            </div>
         </div>
     </div>
+    <script>
+        function ask() {
+            var userInput = document.getElementById('userInput').value;
+            document.getElementById('chat').innerHTML += `<p>User: ${userInput}</p>`;
+            document.getElementById('userInput').value = '';
 
-    <!-- Project Portfolio Grid -->
-    <div class="container mx-auto mt-8 grid grid-cols-4 gap-4">
-        <!-- Button 1 -->
-        <a href="#" class="bg-blue-500 text-white py-4 px-6 rounded-lg hover:bg-blue-600 transition duration-300">
-            Project 1
-        </a>
-        <!-- Button 2 -->
-        <a href="#" class="bg-green-500 text-white py-4 px-6 rounded-lg hover:bg-green-600 transition duration-300">
-            Project 2
-        </a>
-        <!-- Button 3 -->
-        <a href="#" class="bg-orange-500 text-white py-4 px-6 rounded-lg hover:bg-orange-600 transition duration-300">
-            Project 3
-        </a>
-        <!-- Button 4 -->
-        <a href="#" class="bg-purple-500 text-white py-4 px-6 rounded-lg hover:bg-purple-600 transition duration-300">
-            Project 4
-        </a>
-        <!-- Add more buttons as needed -->
-    </div>
-
-    <!-- Your additional content goes here -->
-
+            // Send user input to the server
+            fetch('/ask', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `user_input=${userInput}`,
+            })
+            .then(response => response.json())
+            .then(data => {
+                var botResponse = data.response;
+                document.getElementById('chat').innerHTML += `<p>Bot: ${botResponse}</p>`;
+            });
+        }
+    </script>
 </body>
 </html>
